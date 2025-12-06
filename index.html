@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kareem Gamal - Junior Accountant CV</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2c3e50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .download-btn:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        .cv-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header .title {
+            font-size: 20px;
+            color: #ecf0f1;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .summary-text {
+            color: #555;
+            line-height: 1.8;
+            font-size: 15px;
+            text-align: justify;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .job-header, .edu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .job-title, .degree-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .company, .institution {
+            font-size: 15px;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .location {
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+
+        .date {
+            font-size: 13px;
+            color: #7f8c8d;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .responsibilities {
+            list-style: none;
+            padding: 0;
+        }
+
+        .responsibilities li {
+            padding: 6px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .responsibilities li:before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .languages {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .language-item {
+            background: #f8f9fa;
+            padding: 15px 25px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+        }
+
+        .language-name {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .language-level {
+            color: #667eea;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .interests {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .interest-item {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .interest-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+
+        .interest-desc {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .download-btn {
+                display: none;
+            }
+            .cv-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+            }
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .job-header, .edu-header {
+                flex-direction: column;
+            }
+            .download-btn {
+                position: static;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="download-btn" onclick="downloadPDF()">📥 Download as PDF</button>
+    
+    <div class="cv-container" id="cv-content">
+        <div class="header">
+            <h1>Kareem Gamal</h1>
+            <div class="title">Junior Accountant</div>
+            <div class="contact-info">
+                <div class="contact-item">📍 Ashmun, Menofiya 32857</div>
+                <div class="contact-item">📞 01554879363</div>
+                <div class="contact-item">✉️ <a href="mailto:kareem.gamal1515@gmail.com">kareem.gamal1515@gmail.com</a></div>
+                <div class="contact-item">💻 <a href="https://github.com/EkswaiZed?tab=repositories" target="_blank">GitHub Portfolio</a></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">Professional Summary</h2>
+                <p class="summary-text">
+                    Dedicated and detail-oriented Junior Accountant with a Bachelor's degree in Accounting and hands-on experience in financial operations, accounts payable/receivable, and regulatory compliance. Proven track record in maintaining accurate financial records, conducting data validation, and supporting month-end closing processes. Strong analytical skills combined with excellent customer service capabilities and team collaboration. Committed to leveraging technical proficiency and financial expertise to contribute to organizational growth and financial accuracy.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Professional Experience</h2>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Junior Accountant</div>
+                            <div class="company">Financial Services</div>
+                            <div class="location">Alexandria, Egypt</div>
+                        </div>
+                        <div class="date">August 2024 - July 2025</div>
+                    </div>
+                    <ul class="responsibilities">
+                        <li>Ensured data entry accuracy by reviewing and validating financial records, maintaining 99% accuracy rate</li>
+                        <li>Collaborated with cross-functional team members to enhance financial reporting procedures and streamline workflows</li>
+                        <li>Documented financial transactions in compliance with regulatory standards and internal policies</li>
+                        <li>Maintained organized records of financial transactions using digital filing systems for efficient retrieval</li>
+                        <li>Analyzed expense reports to identify discrepancies and recommended cost-saving solutions</li>
+                        <li>Supported month-end closing activities to ensure timely and accurate financial reporting</li>
+                        <li>Reviewed daily cash activity reports to verify accuracy and identify potential issues</li>
+                        <li>Analyzed financial documents to verify data integrity and mathematical accuracy</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Cashier</div>
+                            <div class="company">Awlad Al-Rweeshy</div>
+                            <div class="location">Menouf, Al-Menofiya, Egypt</div>
+                        </div>
+                        <div class="date">July 2020 - November 2020</div>
+                    </div>
+                    <ul class="responsibilities">
+                        <li>Provided exceptional customer service by assisting customers with inquiries and product information</li>
+                        <li>Maintained cleanliness and organization of checkout area to ensure smooth operations</li>
+                        <li>Supported inventory control by restocking shelves and monitoring stock levels</li>
+                        <li>Collaborated with team members to enhance overall customer service experience</li>
+                        <li>Resolved customer complaints effectively to ensure satisfaction and maintain positive relationships</li>
+                        <li>Monitored cash drawer accuracy and conducted daily reconciliation to prevent discrepancies</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Education</h2>
+                <div class="education-item">
+                    <div class="edu-header">
+                        <div>
+                            <div class="degree-title">Bachelor of Commerce - Accounting</div>
+                            <div class="institution">Faculty of Commerce, Sadat University</div>
+                            <div class="location">Madinat-Al-Sadat, Menofiya, Egypt</div>
+                        </div>
+                        <div class="date">Graduated: September 2022</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Core Competencies</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">Accounts Payable & Receivable</div>
+                    <div class="skill-item">Financial Reporting & Analysis</div>
+                    <div class="skill-item">Data Validation & Integrity</div>
+                    <div class="skill-item">Regulatory Compliance</div>
+                    <div class="skill-item">Expense Management</div>
+                    <div class="skill-item">Customer Service Excellence</div>
+                    <div class="skill-item">Team Collaboration</div>
+                    <div class="skill-item">Cash Handling & Reconciliation</div>
+                    <div class="skill-item">Debt Recovery Techniques</div>
+                    <div class="skill-item">Cash Flow Optimization</div>
+                    <div class="skill-item">Month-End Closing</div>
+                    <div class="skill-item">Microsoft Excel & Accounting Software</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Languages</h2>
+                <div class="languages">
+                    <div class="language-item">
+                        <div class="language-name">Arabic</div>
+                        <div class="language-level">Native</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">English</div>
+                        <div class="language-level">Advanced (C1)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Additional Interests</h2>
+                <div class="interests">
+                    <div class="interest-item">
+                        <div class="interest-title">🏋️ Fitness & Athletics</div>
+                        <div class="interest-desc">Passionate about gym training, calisthenics, running, and various sports activities, demonstrating discipline and goal-oriented mindset</div>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-title">💻 Technology & Cybersecurity</div>
+                        <div class="interest-desc">Enthusiastic about programming, web development, and staying current with cybersecurity trends and best practices</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function downloadPDF() {
+            const element = document.getElementById('cv-content');
+            const button = document.querySelector('.download-btn');
+            
+            button.style.display = 'none';
+            
+            const opt = {
+                margin: 0,
+                filename: 'Kareem_Gamal_CV.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                button.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>
