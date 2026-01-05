@@ -285,7 +285,6 @@
     </style>
 </head>
 <body>
-    <button class="download-btn" onclick="downloadPDF()">📥 Download as PDF</button>
     
     <div class="cv-container" id="cv-content">
         <div class="header">
@@ -412,26 +411,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function downloadPDF() {
-            const element = document.getElementById('cv-content');
-            const button = document.querySelector('.download-btn');
-            
-            button.style.display = 'none';
-            
-            const opt = {
-                margin: 0,
-                filename: 'Kareem_Gamal_CV.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                button.style.display = 'block';
-            });
-        }
-    </script>
 </body>
 </html>
